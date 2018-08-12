@@ -1,6 +1,5 @@
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 public class ChangeFooter {
 
@@ -10,16 +9,22 @@ public class ChangeFooter {
         this.driver = driver;
     }
 
-    @FindBy(className = "btnChangeBackground")
-    private WebElement changeBackgroundButton;
-    @FindBy(className = "btnChangeReels")
-    private WebElement changeIconsButton;
-    @FindBy(className = "btnChangeMachine")
-    private WebElement changeMachineButton;
+    private By changeBackgroundButton = By.className("btnChangeBackground");
+    private By changeIconsButton = By.className("btnChangeReels");
+    private By changeMachineButton = By.className("btnChangeMachine");
 
-    public void changeBackground (){changeBackgroundButton.click();}
-    public void changeIcons (){changeIconsButton.click();}
-    public void changeMachine (){changeMachineButton.click();}
+    public void changeBackground() {
+        driver.findElement(changeBackgroundButton).click();
+    }
 
+    public void changeIcons() {
+        driver.findElement(changeIconsButton).click();
+    }
+
+    public void changeMachine(int clickAmt) {
+        for (int i = 0; i < clickAmt; i++) {
+            driver.findElement(changeMachineButton).click();
+        }
+    }
 
 }

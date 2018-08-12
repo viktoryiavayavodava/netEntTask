@@ -1,6 +1,5 @@
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 public class MachineFooter {
 
@@ -10,51 +9,71 @@ public class MachineFooter {
         this.driver = driver;
     }
 
-    @FindBy(id = "dayWinnings")
-    private WebElement dayWinAmt;
-    @FindBy(id = "lifetimeWinnings")
-    private WebElement allWinsAmt;
-    @FindBy(id = "lastWin")
-    private WebElement lastWinAmt;
-    @FindBy(id = "credits")
-    private WebElement creditsAmt;
-    @FindBy(id = "bet")
-    private WebElement betAmt;
-    @FindBy(id = "betSpinUp")
-    private WebElement betSpinUpButton;
-    @FindBy(id = "betSpinDown")
-    private WebElement betSpinDownButton;
-    @FindBy(id = "spinButton")
-    private WebElement spinButton;
-    @FindBy(id = "tryMe")
-    private WebElement tryMeButton;
+    private By dayWinAmt = By.id("dayWinnings");
+    private By allWinsAmt = By.id("lifetimeWinnings");
+    private By lastWinAmt = By.id("lastWin");
+    private By totalSpins = By.id("credits");
+    private By betAmt = By.id("bet");
 
+    private By prizeWonLine = By.className("//div[@class='trPrize won']");
 
+    private By betSpinDownButton = By.id("betSpinDown");
+    private By spinButton = By.id("spinButton");
+    private By tryMeButton = By.id("tryMe");
+    private By betSpinUpButton = By.id("betSpinUp");
 
-    public void spinTheReels(){
-        spinButton.click();
-    }
-    public void clickTryMe(){
-        tryMeButton.click();
+    public void spinTheReels() {
+        driver.findElement(spinButton).click();
     }
 
-    public void setBetUp (){betSpinUpButton.click();}
-    public void setBetDown (){betSpinDownButton.click();}
+    public void clickTryMe() {
+        driver.findElement(tryMeButton).click();
+    }
 
+    public void setBetUp(int amount) {
+        for (int i = 0; i < amount; i++) {
+            driver.findElement(betSpinUpButton).click();
+        }
+    }
 
-    public String getBetAmt (){
-        return betAmt.getText();
+    public void setBetDown(int amount) {
+        for (int i = 0; i < amount; i++) {
+            driver.findElement(betSpinDownButton).click();
+        }
     }
-    public String getLastWinAmt (){
-        return lastWinAmt.getText();
+
+    public int getBetAmt() {
+        return Integer.parseInt(driver.findElement(betAmt).getText());
     }
-    public String getCreditAmt (){
-        return creditsAmt.getText();
+
+    public int getLastWinAmt() {
+        return Integer.parseInt(driver.findElement(lastWinAmt).getText());
     }
-    public String getDayWinAmt (){
-        return dayWinAmt.getText();
+
+    public int getSpinsAmt() {
+        return Integer.parseInt(driver.findElement(totalSpins).getText());
     }
-    public String getAllWinsAmt (){
-        return allWinsAmt.getText();
+
+    public int getDayWinAmt() {
+        return Integer.parseInt(driver.findElement(dayWinAmt).getText());
+    }
+
+    public int getAllWinsAmt() {
+        return Integer.parseInt(driver.findElement(allWinsAmt).getText());
+    }
+
+    public int calculateSpinsLeft(int spins, int bet) {
+        spinTheReels();
+        int spinsLeft = spins - bet;
+        return spinsLeft;
+    }
+
+    public void spinUntilWin() {
+        while (!driver.findElement(prizeWonLine).isDisplayed()) ;
+        {
+            spinTheReels();
+        }
     }
 }
+
+

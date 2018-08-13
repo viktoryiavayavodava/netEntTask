@@ -26,7 +26,9 @@ public class SlotMachineNineLinesTest {
         slotGame = new SlotGame(driver);
         machineFooter = new MachineFooter(driver);
         changeFooter = new ChangeFooter(driver);
-
+        //--> to check amt of payRows in the current slot and apply calculation logic accordingly
+        //slotGame.getPayoutRows();
+        //add here hashmap search to return logic for corresponding payRows amount;
     }
 
     @Test

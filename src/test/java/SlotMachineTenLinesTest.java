@@ -27,7 +27,9 @@ public class SlotMachineTenLinesTest {
         machineFooter = new MachineFooter(driver);
         changeFooter = new ChangeFooter(driver);
         changeFooter.changeMachine(4);
-
+        //--> to check amt of payRows in the current slot and apply calculation logic accordingly
+        //slotGame.getPayoutRows();
+        //add here hashmap search to return logic for corresponding payRows amount;
     }
 
     @Test
@@ -66,7 +68,6 @@ public class SlotMachineTenLinesTest {
 
     @Test
     public void betMaxTest(){
-        int initialBet = machineFooter.getBetAmt();
         machineFooter.setBetUp(20);
         int newBet = machineFooter.getBetAmt();
         Assert.assertEquals(newBet,10);
@@ -97,6 +98,5 @@ public class SlotMachineTenLinesTest {
         driver.manage().deleteAllCookies();
         driver.quit();
         driver=null;
-
     }
 }

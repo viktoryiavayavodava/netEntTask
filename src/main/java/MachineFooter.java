@@ -26,10 +26,6 @@ public class MachineFooter {
         driver.findElement(spinButton).click();
     }
 
-    public void clickTryMe() {
-        driver.findElement(tryMeButton).click();
-    }
-
     public void setBetUp(int amount) {
         for (int i = 0; i < amount; i++) {
             driver.findElement(betSpinUpButton).click();
@@ -45,19 +41,15 @@ public class MachineFooter {
     public int getBetAmt() {
         return Integer.parseInt(driver.findElement(betAmt).getText());
     }
-
-    public int getLastWinAmt() {
-        return Integer.parseInt(driver.findElement(lastWinAmt).getText());
-    }
-
     public int getSpinsAmt() {
         return Integer.parseInt(driver.findElement(totalSpins).getText());
     }
-
+    public int getLastWinAmt() {
+        return Integer.parseInt(driver.findElement(lastWinAmt).getText());
+    }
     public int getDayWinAmt() {
         return Integer.parseInt(driver.findElement(dayWinAmt).getText());
     }
-
     public int getAllWinsAmt() {
         return Integer.parseInt(driver.findElement(allWinsAmt).getText());
     }

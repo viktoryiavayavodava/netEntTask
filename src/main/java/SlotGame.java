@@ -1,20 +1,17 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import java.util.List;
 
 public class SlotGame {
 
     private WebDriver driver;
 
-
     public SlotGame(WebDriver driver) {
         this.driver = driver;
     }
-
-    private By prizeList = By.id("prizes_list");
-    private By slotPrizeList = By.className("prizes_list_slot_machine");
-
-    private By prizeWonLine = By.className("//div[@class='trPrize won']");
-
+    private By prizeListRow = By.xpath("//div[@id='prizes_list']/div[not(contains(@style, 'none'))]/div");
     private By payoutRowOne = By.xpath("//div[@id='prizes_list']/div/div[1]");
     private By payoutRowTwo = By.xpath("//div[@id='prizes_list']/div/div[2]");
     private By payoutRowThree = By.xpath("//div[@id='prizes_list']/div/div[3]");
@@ -26,50 +23,34 @@ public class SlotGame {
     private By payoutRowNine = By.xpath("//div[@id='prizes_list']/div/div[9]");
     private By payoutRowTen = By.xpath("//div[@id='prizes_list']/div/div[10]");
 
-    private By reel1 = By.id("reel1");
-    private By reel2 = By.id("reel2");
-    private By reel3 = By.id("reel3");
-
-    public int getRowOnePrize() {
-        return Integer.getInteger(driver.findElement(payoutRowOne).getText());
-    }
-
+    public int getRowOnePrize() {return Integer.parseInt(driver.findElement(payoutRowOne).getText());}
     public int getRowTwoPrize() {
         return Integer.parseInt(driver.findElement(payoutRowTwo).getText());
     }
-
     public int getRowThreePrize() {
         return Integer.parseInt(driver.findElement(payoutRowThree).getText());
     }
-
     public int getRowFourPrize() {
         return Integer.parseInt(driver.findElement(payoutRowFour).getText());
     }
-
     public int getRowFivePrize() {
         return Integer.parseInt(driver.findElement(payoutRowFive).getText());
     }
-
     public int getRowSixPrize() {
         return Integer.parseInt(driver.findElement(payoutRowSix).getText());
     }
-
     public int getRowSevenPrize() {
         return Integer.parseInt(driver.findElement(payoutRowSeven).getText());
     }
-
     public int getRowEightPrize() {
         return Integer.parseInt(driver.findElement(payoutRowEight).getText());
     }
-
     public int getRowNinePrize() {
         return Integer.parseInt(driver.findElement(payoutRowNine).getText());
     }
-
     public int getRowTenPrize() {
         return Integer.parseInt(driver.findElement(payoutRowTen).getText());
     }
-
     public int[] payoutsSix = new int[]{getRowOnePrize(), getRowTwoPrize(), getRowThreePrize(),
             getRowFourPrize(), getRowFivePrize(), getRowSixPrize()};
     public int[] payoutsEight = new int[]{getRowOnePrize(), getRowTwoPrize(), getRowThreePrize(),
@@ -107,8 +88,15 @@ public class SlotGame {
         return payoutsTen;
     }
 
-
+    public int getPayoutRows() {
+        Select selectRows = new Select(driver.findElement(prizeListRow));
+        List<WebElement> listOptions = selectRows.getOptions();
+        int payoutRowsCount = listOptions.size();
+        return payoutRowsCount;
+    }
 }
+
+
 
 
 

@@ -1,13 +1,16 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ChangeFooter {
 
-    private WebDriver driver;
+    public WebDriver driver;
 
     public ChangeFooter(WebDriver driver) {
         this.driver = driver;
     }
+    private By betAmt = By.xpath("//span[@id='bet']");
 
     private By changeBackgroundButton = By.className("btnChangeBackground");
     private By changeIconsButton = By.className("btnChangeReels");
@@ -24,6 +27,8 @@ public class ChangeFooter {
     public void changeMachine(int clickAmt) {
         for (int i = 0; i < clickAmt; i++) {
             driver.findElement(changeMachineButton).click();
+            WebDriverWait wait = new WebDriverWait(driver, 10);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(betAmt));
         }
     }
 

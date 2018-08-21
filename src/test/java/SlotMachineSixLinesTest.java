@@ -2,10 +2,14 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -18,7 +22,7 @@ public class SlotMachineSixLinesTest {
     private ChangeFooter changeFooter;
 
     @Before
-    public void setUp() throws IOException {
+    public void setUp() throws IOException, InterruptedException {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Lenovo\\IdeaProjects\\netEntTask\\src\\main\\resources\\chromedriver.exe");
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
         capabilities.setCapability("marionette", true);
@@ -27,10 +31,12 @@ public class SlotMachineSixLinesTest {
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get("http://slotmachinescript.com/");
-        slotGame = new SlotGame(driver);
         machineFooter = new MachineFooter(driver);
+        slotGame = new SlotGame(driver);
         changeFooter = new ChangeFooter(driver);
         changeFooter.changeMachine(1);
+        Thread.sleep(2000);
+
         //--> to check amt of payRows in the current slot and apply calculation logic accordingly
         //slotGame.getPayoutRows();
         //add here hashmap search to return logic for corresponding payRows amount;
@@ -86,17 +92,18 @@ public class SlotMachineSixLinesTest {
         machineFooter.calculateSpinsLeft(currentSpins, currentBet);
     }
 
-    @Test
-    public void winChartChangeTest() {
-        int currentBet = machineFooter.getBetAmt();
-        int[] currentPayouts = slotGame.payoutsSix;
-        machineFooter.setBetUp(1);
-        int[] payoutsCalculated = slotGame.calculatePayoutsSix(currentBet, currentPayouts);
-        int[] newPayouts = slotGame.payoutsSix;
-        for (int i = 0; i < currentPayouts.length; i++) {
-            Assert.assertTrue(newPayouts[i] == payoutsCalculated[i]);
-        }
-    }
+//    @Test
+//    public void winChartChangeTest() {
+//        int currentBet = machineFooter.getBetAmt();
+//        int[] currentPayouts = slotGame.payoutsSix;
+//        machineFooter.setBetUp(1);
+//
+//        int[] payoutsCalculated = slotGame.calculatePayoutsSix(currentBet, currentPayouts);
+//        int[] newPayouts = slotGame.payoutsSix;
+//        for (int i = 0; i < currentPayouts.length; i++) {
+//            Assert.assertTrue(newPayouts[i] == payoutsCalculated[i]);
+//        }
+//    }
 
     @After
     public void tearDown() {

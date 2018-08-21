@@ -16,17 +16,18 @@ public class SlotMachineTenLinesTest {
     private ChangeFooter changeFooter;
 
     @Before
-    public void setUp() throws IOException {
+    public void setUp() throws IOException, InterruptedException {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Lenovo\\IdeaProjects\\netEntTask\\src\\main\\resources\\chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get("http://slotmachinescript.com/");
-        slotGame = new SlotGame(driver);
+//        slotGame = new SlotGame(driver);
         machineFooter = new MachineFooter(driver);
         changeFooter = new ChangeFooter(driver);
         changeFooter.changeMachine(4);
+        Thread.sleep(2000);
         //--> to check amt of payRows in the current slot and apply calculation logic accordingly
         //slotGame.getPayoutRows();
         //add here hashmap search to return logic for corresponding payRows amount;
@@ -81,17 +82,17 @@ public class SlotMachineTenLinesTest {
         machineFooter.calculateSpinsLeft (currentSpins,currentBet);
     }
 
-    @Test
-    public void winChartChangeTest (){
-        int currentBet = machineFooter.getBetAmt();
-        int [] currentPayouts = slotGame.payoutsTen;
-        machineFooter.setBetUp(1);
-        int [] payoutsCalculated = slotGame.calculatePayoutsTen(currentBet,currentPayouts);
-        int[] newPayouts = slotGame.payoutsTen;
-        for (int i=0;i<currentPayouts.length;i++){
-            Assert.assertTrue(newPayouts[i]==payoutsCalculated[i]);
-        }
-    }
+//    @Test
+//    public void winChartChangeTest (){
+//        int currentBet = machineFooter.getBetAmt();
+//        int [] currentPayouts = slotGame.payoutsTen;
+//        machineFooter.setBetUp(1);
+//        int [] payoutsCalculated = slotGame.calculatePayoutsTen(currentBet,currentPayouts);
+//        int[] newPayouts = slotGame.payoutsTen;
+//        for (int i=0;i<currentPayouts.length;i++){
+//            Assert.assertTrue(newPayouts[i]==payoutsCalculated[i]);
+//        }
+//    }
 
     @After
     public void tearDown(){

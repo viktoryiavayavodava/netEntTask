@@ -5,15 +5,14 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class SlotMachineEightLinesTest {
     private WebDriver driver;
-    private SlotGame slotGame;
     private MachineFooter machineFooter;
     private ChangeFooter changeFooter;
+    //    private SlotGame slotGame;
 
     @Before
     public void setUp() throws IOException, InterruptedException {
@@ -23,9 +22,9 @@ public class SlotMachineEightLinesTest {
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get("http://slotmachinescript.com/");
-//        slotGame = new SlotGame(driver);
         machineFooter = new MachineFooter(driver);
         changeFooter = new ChangeFooter(driver);
+//        slotGame = new SlotGame(driver);
         changeFooter.changeMachine(2);
         Thread.sleep(2000);
         //--> to check amt of payRows in the current slot and apply calculation logic accordingly

@@ -5,15 +5,14 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class SlotMachineTenLinesTest {
     private WebDriver driver;
-    private SlotGame slotGame;
     private MachineFooter machineFooter;
     private ChangeFooter changeFooter;
+//    private SlotGame slotGame;
 
     @Before
     public void setUp() throws IOException, InterruptedException {

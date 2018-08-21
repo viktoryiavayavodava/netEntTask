@@ -5,7 +5,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ChangeFooter {
 
-    public WebDriver driver;
+    private WebDriver driver;
 
     public ChangeFooter(WebDriver driver) {
         this.driver = driver;
@@ -16,6 +16,7 @@ public class ChangeFooter {
     private By changeIconsButton = By.className("btnChangeReels");
     private By changeMachineButton = By.className("btnChangeMachine");
 
+
     public void changeBackground() {
         driver.findElement(changeBackgroundButton).click();
     }
@@ -24,11 +25,12 @@ public class ChangeFooter {
         driver.findElement(changeIconsButton).click();
     }
 
-    public void changeMachine(int clickAmt) {
+    public void changeMachine(int clickAmt) throws InterruptedException {
         for (int i = 0; i < clickAmt; i++) {
             driver.findElement(changeMachineButton).click();
             WebDriverWait wait = new WebDriverWait(driver, 10);
             wait.until(ExpectedConditions.visibilityOfElementLocated(betAmt));
+            Thread.sleep(2000);
         }
     }
 

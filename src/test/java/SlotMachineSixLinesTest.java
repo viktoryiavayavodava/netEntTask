@@ -2,24 +2,19 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class SlotMachineSixLinesTest {
 
     private WebDriver driver;
-    private SlotGame slotGame;
     private MachineFooter machineFooter;
     private ChangeFooter changeFooter;
+    //    private SlotGame slotGame;
 
     @Before
     public void setUp() throws IOException, InterruptedException {
@@ -31,16 +26,14 @@ public class SlotMachineSixLinesTest {
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get("http://slotmachinescript.com/");
-        machineFooter = new MachineFooter(driver);
-        slotGame = new SlotGame(driver);
         changeFooter = new ChangeFooter(driver);
+        machineFooter = new MachineFooter(driver);
+//        slotGame = new SlotGame(driver);
         changeFooter.changeMachine(1);
         Thread.sleep(2000);
-
         //--> to check amt of payRows in the current slot and apply calculation logic accordingly
         //slotGame.getPayoutRows();
         //add here hashmap search to return logic for corresponding payRows amount;
-
     }
 
     @Test
@@ -97,7 +90,6 @@ public class SlotMachineSixLinesTest {
 //        int currentBet = machineFooter.getBetAmt();
 //        int[] currentPayouts = slotGame.payoutsSix;
 //        machineFooter.setBetUp(1);
-//
 //        int[] payoutsCalculated = slotGame.calculatePayoutsSix(currentBet, currentPayouts);
 //        int[] newPayouts = slotGame.payoutsSix;
 //        for (int i = 0; i < currentPayouts.length; i++) {

@@ -7,9 +7,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class MachineFooter {
+public class MachineFooter  {
 
-    public WebDriver driver;
+    private WebDriver driver;
 
     public MachineFooter(WebDriver driver) {
         this.driver = driver;
@@ -76,7 +76,6 @@ public class MachineFooter {
             spinTheReels();
         }
     }
-
 
 }
 

@@ -9,9 +9,9 @@ import java.util.List;
 
 public class SlotGame {
 
-    public WebDriver driver;
+    private WebDriver driver;
 
-    public SlotGame (WebDriver driver) {
+    public SlotGame(WebDriver driver) {
         this.driver = driver;
     }
 
